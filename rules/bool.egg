@@ -1,0 +1,27 @@
+(datatype Expr
+  (True)
+  (False)
+  (Var String)
+  (Not Expr)
+  (And Expr Expr)
+  (Or Expr Expr))
+
+(rewrite (Not (Not x)) x)
+(rewrite (Not (True)) (False))
+(rewrite (Not (False)) (True))
+
+(rewrite (And x (True)) x)
+(rewrite (And x (False)) (False))
+(rewrite (Or x (False)) x)
+(rewrite (Or x (True)) (True))
+(rewrite (And x x) x)
+(rewrite (Or x x) x)
+(rewrite (And x (Not x)) (False))
+(rewrite (Or x (Not x)) (True))
+(rewrite (Or x (And x y)) x)
+(rewrite (And x (Or x y)) x)
+
+(rewrite (And x y) (And y x))
+(rewrite (Or x y) (Or y x))
+(rewrite (Or (And x y) (And x (Not y))) x)
+(rewrite (And (Or x y) (Or x (Not y))) x)
